@@ -4,191 +4,170 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shashank Pandya | Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         :root {
-            --primary: #2563eb;
+            --glass: rgba(255, 255, 255, 0.8);
+            --accent: #6366f1; /* Modern Indigo */
             --dark: #0f172a;
-            --light: #f8fafc;
-            --gray: #64748b;
-            --transition: all 0.3s ease;
+            --text: #1e293b;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--light);
-            color: var(--dark);
-            line-height: 1.6;
-            scroll-behavior: smooth;
+        body { 
+            font-family: 'Inter', -apple-system, sans-serif; 
+            background: #f8fafc; 
+            color: var(--text); 
+            line-height: 1.7;
+            overflow-x: hidden;
         }
 
-        /* --- Navigation --- */
+        /* Animated Background Gradient */
+        .bg-glow {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 50%, #e0e7ff 0%, #f8fafc 100%);
+            z-index: -1;
+        }
+
+        /* Glassmorphism Header */
         nav {
-            position: fixed;
-            top: 0; width: 100%;
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
+            position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+            width: 90%; max-width: 800px;
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 50px;
+            padding: 12px 30px;
+            display: flex; justify-content: space-between; align-items: center;
             z-index: 1000;
-            padding: 1rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
         }
 
-        .logo { font-weight: 700; color: var(--primary); font-size: 1.2rem; }
-        .nav-links { display: flex; gap: 2rem; list-style: none; }
-        .nav-links a { text-decoration: none; color: var(--dark); font-weight: 500; transition: var(--transition); }
-        .nav-links a:hover { color: var(--primary); }
+        .nav-links a { text-decoration: none; color: var(--dark); font-weight: 500; margin-left: 20px; font-size: 0.9rem; transition: 0.3s; }
+        .nav-links a:hover { color: var(--accent); }
 
-        /* --- Hero Section --- */
+        /* Hero Section */
         .hero {
             height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-            padding: 0 20px;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; padding: 0 20px;
         }
 
-        .hero h1 { font-size: 3.5rem; margin-bottom: 1rem; }
-        
-        /* Interactive Typing Animation */
-        .typing-text {
-            font-size: 1.5rem;
-            color: var(--primary);
-            border-right: 3px solid var(--primary);
-            white-space: nowrap;
-            overflow: hidden;
-            width: 0;
-            animation: typing 3s steps(30, end) forwards, blink 0.8s infinite;
-        }
+        .hero h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); letter-spacing: -2px; color: var(--dark); margin-bottom: 10px; }
+        .hero p { font-size: 1.2rem; color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 2px; }
 
-        @keyframes typing { from { width: 0 } to { width: 100% } }
-        @keyframes blink { from { border-color: transparent } to { border-color: var(--primary) } }
+        /* Content Sections */
+        .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+        section { padding: 100px 0; opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        section.visible { opacity: 1; transform: translateY(0); }
 
-        /* --- Sections --- */
-        section { padding: 80px 10%; }
-        h2 { font-size: 2rem; margin-bottom: 2rem; position: relative; display: inline-block; }
-        h2::after { content: ''; position: absolute; bottom: -5px; left: 0; width: 50px; height: 4px; background: var(--primary); }
+        h2 { font-size: 2rem; margin-bottom: 40px; display: flex; align-items: center; gap: 15px; }
+        h2::after { content: ""; height: 2px; flex-grow: 1; background: linear-gradient(to right, var(--accent), transparent); }
 
-        /* --- Experience Cards --- */
-        .timeline { border-left: 2px solid #e2e8f0; padding-left: 30px; }
+        /* Experience Cards */
         .card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
-            transition: var(--transition);
-            border: 1px solid transparent;
+            background: white; border-radius: 20px; padding: 30px; margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02); border: 1px solid #f1f5f9;
+            transition: 0.3s; position: relative;
         }
-        .card:hover { transform: translateY(-5px); border-color: var(--primary); }
-        .card h3 { color: var(--primary); margin-bottom: 5px; }
-        .card .date { font-size: 0.9rem; color: var(--gray); font-weight: 600; }
+        .card:hover { transform: scale(1.02); box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+        .card .date { font-size: 0.85rem; color: var(--accent); font-weight: 700; margin-bottom: 10px; display: block; }
+        
+        /* Grid for Skills */
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; }
+        .skill-node {
+            background: white; padding: 15px; border-radius: 12px; text-align: center;
+            font-weight: 500; border: 1px solid #e2e8f0; transition: 0.3s;
+        }
+        .skill-node:hover { background: var(--dark); color: white; border-color: var(--dark); }
 
-        /* --- Interactive Skills Grid --- */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
+        /* CTA Button */
+        .btn {
+            background: var(--dark); color: white; padding: 12px 30px; border-radius: 30px;
+            text-decoration: none; font-weight: 600; display: inline-block; transition: 0.3s; margin-top: 20px;
         }
-        .skill-item {
-            background: white;
-            padding: 15px;
-            text-align: center;
-            border-radius: 8px;
-            font-weight: 600;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            transition: var(--transition);
-            cursor: default;
-        }
-        .skill-item:hover { background: var(--primary); color: white; }
+        .btn:hover { background: var(--accent); transform: translateY(-3px); }
 
-        /* --- Mobile Responsive --- */
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
-            .nav-links { display: none; }
-        }
     </style>
 </head>
 <body>
 
+    <div class="bg-glow"></div>
+
     <nav>
-        <div class="logo">SP.</div>
-        <ul class="nav-links">
-            <li><a href="#about">About</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#projects">Projects</a></li>
-        </ul>
+        <div style="font-weight: 800; font-size: 1.2rem;">SP</div>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#work">Work</a>
+            <a href="#skills">Skills</a>
+        </div>
     </nav>
 
     <header class="hero">
         <h1>Shashank Pandya</h1>
-        <div class="typing-text">Junior Business Analyst</div>
-        <p style="margin-top: 20px; color: var(--gray);">MBA in Business Intelligence | Data Enthusiast | Automation Focused</p>
+        <p>Junior Business Analyst</p>
+        <div style="margin-top: 20px; color: #64748b;">MBA in Business Intelligence @ BKSPMS</div>
+        <a href="mailto:pandyashashank2305@gmail.com" class="btn">Get In Touch</a>
     </header>
 
-    <section id="about">
-        <h2>About Me</h2>
-        <p>Adept at analyzing trends, enhancing data accuracy, and collaborating with cross-functional teams to streamline processes and strengthen operational efficiency. Based in Ahmedabad, Gujarat.</p>
-    </section>
+    <div class="container">
+        <section id="about">
+            <h2>About</h2>
+            <p>Junior Business Analyst with hands-on experience in performance reporting, data cleansing, and workflow documentation[cite: 5]. Adept at analyzing trends and collaborating with cross-functional teams to streamline processes[cite: 6].</p>
+        </section>
 
-    <section id="experience">
-        <h2>Work Experience</h2>
-        <div class="timeline">
+        <section id="work">
+            <h2>Experience</h2>
             <div class="card">
+                <span class="date">July 2025 - PRESENT</span>
                 <h3>Junior Business Analyst</h3>
-                <div class="company">Infoanalytica (On-Site)</div>
-                <div class="date">July 2025 - Present</div>
-                <p>Providing campaign performance analytics and automating delivery file generation using GenAI to improve turnaround time.</p>
+                <p style="color: var(--accent); margin-bottom: 15px;">Infoanalytica (On-Site)</p>
+                <ul style="padding-left: 20px; font-size: 0.95rem;">
+                    <li>Automated delivery file generation using GenAI, reducing manual effort.</li>
+                    <li>Provide campaign performance numbers and analyze trends for decision-making[cite: 16].</li>
+                    <li>Prepare QC reports ensuring data accuracy and adherence to standards[cite: 19].</li>
+                </ul>
             </div>
+
             <div class="card">
+                <span class="date">Jan 2025 - June 2025</span>
                 <h3>Management Trainee</h3>
-                <div class="company">Infoanalytica (On-Site)</div>
-                <div class="date">Jan 2025 - June 2025</div>
-                <p>Led data extraction projects for university housing using Python, ChatGPT, and Copilot.</p>
+                <p style="color: var(--accent); margin-bottom: 15px;">Infoanalytica (On-Site)</p>
+                <p style="font-size: 0.95rem;">Led data extraction for university housing using ChatGPT, Copilot, and Python[cite: 26]. Documented end-to-end process flow for the Walmart Enrichment Project[cite: 28].</p>
             </div>
-            <div class="card">
-                <h3>Data Analyst Intern</h3>
-                <div class="company">Pinsoftek (On-site)</div>
-                <div class="date">May 2024 - July 2024</div>
-                <p>Developed dynamic Power BI dashboards and managed SQL databases for real-time analysis.</p>
+        </section>
+
+        <section id="skills">
+            <h2>Tech Stack</h2>
+            <div class="skills-grid">
+                <div class="skill-node">SQL</div>
+                <div class="skill-node">Power BI</div>
+                <div class="skill-node">Python</div>
+                <div class="skill-node">Advanced Excel</div>
+                <div class="skill-node">DAX</div>
+                <div class="skill-node">GenAI</div>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
 
-    <section id="skills" style="background: #f1f5f9;">
-        <h2>Core Skills</h2>
-        <div class="skills-grid">
-            <div class="skill-item">SQL</div>
-            <div class="skill-item">Power BI</div>
-            <div class="skill-item">Python</div>
-            <div class="skill-item">Advanced Excel</div>
-            <div class="skill-item">GenAI</div>
-            <div class="skill-item">DAX</div>
-            <div class="skill-item">Data Cleansing</div>
-            <div class="skill-item">Documentation</div>
-        </div>
-    </section>
-
-    <section id="projects">
-        <h2>Key Projects</h2>
-        <div class="card">
-            <h3>Title Analysis - Power BI Dashboard</h3>
-            <p>Analyzed video engagement metrics across 11,000+ distinct tags to determine optimal content upload times and viewer engagement patterns.</p>
-        </div>
-    </section>
-
-    <footer style="padding: 40px; text-align: center; background: var(--dark); color: white;">
-        <p>Let's Connect</p>
-        <p style="font-size: 0.9rem; margin-top: 10px; opacity: 0.7;">pandyashashank2305@gmail.com | +91 9081040354</p>
+    <footer style="text-align: center; padding: 50px; color: #94a3b8; font-size: 0.8rem;">
+        &copy; 2026 Shashank Pandya. Ahmedabad, Gujarat[cite: 1].
     </footer>
 
+    <script>
+        // Intersection Observer for Scroll Animations
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
 </body>
 </html>
