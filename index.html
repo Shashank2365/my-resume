@@ -3,171 +3,221 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shashank Pandya | Portfolio</title>
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <title>Shashank Pandya | Junior Business Analyst</title>
     <style>
         :root {
-            --glass: rgba(255, 255, 255, 0.8);
-            --accent: #6366f1; /* Modern Indigo */
+            --glass: rgba(255, 255, 255, 0.9);
+            --accent: #2563eb;
             --dark: #0f172a;
-            --text: #1e293b;
+            --text: #334155;
+            --bg: #f8fafc;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
-            font-family: 'Inter', -apple-system, sans-serif; 
-            background: #f8fafc; 
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+            background: var(--bg); 
             color: var(--text); 
-            line-height: 1.7;
-            overflow-x: hidden;
+            line-height: 1.6;
+            scroll-behavior: smooth;
         }
 
-        /* Animated Background Gradient */
-        .bg-glow {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% 50%, #e0e7ff 0%, #f8fafc 100%);
-            z-index: -1;
-        }
-
-        /* Glassmorphism Header */
+        /* Top Navigation */
         nav {
-            position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
-            width: 90%; max-width: 800px;
+            position: fixed; top: 0; width: 100%;
             background: var(--glass);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255,255,255,0.3);
-            border-radius: 50px;
-            padding: 12px 30px;
-            display: flex; justify-content: space-between; align-items: center;
+            backdrop-filter: blur(10px);
             z-index: 1000;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            padding: 15px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid #e2e8f0;
         }
 
-        .nav-links a { text-decoration: none; color: var(--dark); font-weight: 500; margin-left: 20px; font-size: 0.9rem; transition: 0.3s; }
+        .nav-links a { text-decoration: none; color: var(--dark); font-weight: 600; margin-left: 20px; transition: 0.3s; }
         .nav-links a:hover { color: var(--accent); }
 
-        /* Hero Section */
+        /* Hero / Contact Header */
         .hero {
-            height: 100vh;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            text-align: center; padding: 0 20px;
+            padding: 140px 20px 60px;
+            text-align: center;
+            background: linear-gradient(135deg, #ffffff 0%, #eff6ff 100%);
         }
 
-        .hero h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); letter-spacing: -2px; color: var(--dark); margin-bottom: 10px; }
-        .hero p { font-size: 1.2rem; color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 2px; }
-
-        /* Content Sections */
-        .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
-        section { padding: 100px 0; opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
-        section.visible { opacity: 1; transform: translateY(0); }
-
-        h2 { font-size: 2rem; margin-bottom: 40px; display: flex; align-items: center; gap: 15px; }
-        h2::after { content: ""; height: 2px; flex-grow: 1; background: linear-gradient(to right, var(--accent), transparent); }
-
-        /* Experience Cards */
-        .card {
-            background: white; border-radius: 20px; padding: 30px; margin-bottom: 30px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.02); border: 1px solid #f1f5f9;
-            transition: 0.3s; position: relative;
-        }
-        .card:hover { transform: scale(1.02); box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
-        .card .date { font-size: 0.85rem; color: var(--accent); font-weight: 700; margin-bottom: 10px; display: block; }
+        .hero h1 { font-size: 3rem; color: var(--dark); margin-bottom: 10px; }
+        .hero .tagline { font-size: 1.2rem; color: var(--accent); font-weight: bold; margin-bottom: 20px; }
         
-        /* Grid for Skills */
-        .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 15px; }
-        .skill-node {
-            background: white; padding: 15px; border-radius: 12px; text-align: center;
-            font-weight: 500; border: 1px solid #e2e8f0; transition: 0.3s;
+        .contact-bar {
+            display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;
+            font-weight: 500; color: var(--dark);
         }
-        .skill-node:hover { background: var(--dark); color: white; border-color: var(--dark); }
+        .contact-item { display: flex; align-items: center; gap: 8px; }
 
-        /* CTA Button */
-        .btn {
-            background: var(--dark); color: white; padding: 12px 30px; border-radius: 30px;
-            text-decoration: none; font-weight: 600; display: inline-block; transition: 0.3s; margin-top: 20px;
+        /* Main Container */
+        .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+
+        section { margin-bottom: 60px; opacity: 0; transform: translateY(20px); transition: 0.6s ease-out; }
+        section.reveal { opacity: 1; transform: translateY(0); }
+
+        h2 { font-size: 1.8rem; color: var(--dark); margin-bottom: 25px; border-left: 5px solid var(--accent); padding-left: 15px; }
+
+        /* Experience & Project Cards */
+        .card {
+            background: white; border-radius: 12px; padding: 25px; margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05); border: 1px solid #f1f5f9;
         }
-        .btn:hover { background: var(--accent); transform: translateY(-3px); }
+        .card h3 { color: var(--dark); margin-bottom: 5px; }
+        .card .company { color: var(--accent); font-weight: 600; margin-bottom: 10px; display: block; }
+        .card .date { font-size: 0.85rem; color: #64748b; font-weight: bold; }
+        
+        ul { padding-left: 20px; margin-top: 10px; }
+        li { margin-bottom: 8px; }
 
+        /* Skills & Hobbies Grid */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; }
+        .grid-item {
+            background: white; padding: 15px; border-radius: 8px; text-align: center;
+            font-weight: 600; border: 1px solid #e2e8f0; transition: 0.3s;
+        }
+        .grid-item:hover { background: var(--accent); color: white; border-color: var(--accent); }
+
+        footer { text-align: center; padding: 40px; background: var(--dark); color: white; margin-top: 40px; }
+
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 2.2rem; }
+            .contact-bar { flex-direction: column; gap: 10px; }
+        }
     </style>
 </head>
 <body>
 
-    <div class="bg-glow"></div>
-
     <nav>
-        <div style="font-weight: 800; font-size: 1.2rem;">SP</div>
+        <div style="font-weight: 800; font-size: 1.3rem;">SHASHANK</div>
         <div class="nav-links">
-            <a href="#about">About</a>
-            <a href="#work">Work</a>
+            <a href="#experience">Experience</a>
+            <a href="#projects">Projects</a>
             <a href="#skills">Skills</a>
         </div>
     </nav>
 
     <header class="hero">
         <h1>Shashank Pandya</h1>
-        <p>Junior Business Analyst</p>
-        <div style="margin-top: 20px; color: #64748b;">MBA in Business Intelligence @ BKSPMS</div>
-        <a href="mailto:pandyashashank2305@gmail.com" class="btn">Get In Touch</a>
+        <div class="tagline">Junior Business Analyst</div>
+        <div class="contact-bar">
+            <div class="contact-item">📧 pandyashashank2305@gmail.com</div>
+            <div class="contact-item">📞 +91 9081040354</div>
+            <div class="contact-item">📍 Ahmedabad, Gujarat</div>
+        </div>
     </header>
 
     <div class="container">
-        <section id="about">
-            <h2>About</h2>
-            <p>Junior Business Analyst with hands-on experience in performance reporting, data cleansing, and workflow documentation[cite: 5]. Adept at analyzing trends and collaborating with cross-functional teams to streamline processes[cite: 6].</p>
+        <section id="objective" class="reveal">
+            <h2>Professional Objective</h2>
+            <p>Junior Business Analyst with hands-on experience in performance reporting, data cleansing, data assignment, and workflow documentation. Adept at analyzing trends, enhancing data accuracy, and collaborating with cross-functional teams to streamline processes and strengthen operational efficiency.</p>
         </section>
 
-        <section id="work">
-            <h2>Experience</h2>
+        <section id="experience" class="reveal">
+            <h2>Work Experience</h2>
+            
             <div class="card">
-                <span class="date">July 2025 - PRESENT</span>
+                <span class="date">1st July to Present</span>
                 <h3>Junior Business Analyst</h3>
-                <p style="color: var(--accent); margin-bottom: 15px;">Infoanalytica (On-Site)</p>
-                <ul style="padding-left: 20px; font-size: 0.95rem;">
-                    <li>Automated delivery file generation using GenAI, reducing manual effort.</li>
-                    <li>Provide campaign performance numbers and analyze trends for decision-making[cite: 16].</li>
-                    <li>Prepare QC reports ensuring data accuracy and adherence to standards[cite: 19].</li>
+                <span class="company">Infoanalytica (On - Site)</span>
+                <ul>
+                    <li>Provide daily and weekly campaign performance numbers and analyze trends to support decision-making.</li>
+                    <li>Identify non-workable data and perform suppression to improve data quality and campaign efficiency.</li>
+                    <li>Assign campaign data based on performance insights and conduct detailed analysis for accuracy and usability.</li>
+                    <li>Prepare and deliver QC reports ensuring data accuracy, consistency, and adherence to process standards.</li>
+                    <li>Automated delivery file generation for two campaigns using GenAI, reducing manual effort and improving turnaround time.</li>
+                    <li>Prepared automation and UI documentation and collaborated with the tech team to support implementation.</li>
                 </ul>
             </div>
 
             <div class="card">
-                <span class="date">Jan 2025 - June 2025</span>
+                <span class="date">1st January 2025 to 30th June 2025</span>
                 <h3>Management Trainee</h3>
-                <p style="color: var(--accent); margin-bottom: 15px;">Infoanalytica (On-Site)</p>
-                <p style="font-size: 0.95rem;">Led data extraction for university housing using ChatGPT, Copilot, and Python[cite: 26]. Documented end-to-end process flow for the Walmart Enrichment Project[cite: 28].</p>
+                <span class="company">Infoanalytica (On - Site)</span>
+                <ul>
+                    <li>Lead data extraction and validation for university housing data using ChatGPT, Copilot, and Python.</li>
+                    <li>Created structured prompts, performed manual verification, and applied rule-based QC checks.</li>
+                    <li>Prepared workflow documentation, SOPs, and the QC checklist to ensure accurate and complete datasets.</li>
+                    <li>Documented end-to-end process flow of the Walmart Enrichment Project, covering extraction, enrichment, validation, and final QC.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <span class="date">1st May 2024 to 31st July 2024</span>
+                <h3>Data Analyst Intern</h3>
+                <span class="company">Pinsoftek (On-site)</span>
+                <ul>
+                    <li>Analyzed and visualized GMB location data using Excel, MySQL, and Power BI.</li>
+                    <li>Responsible for data cleaning, structuring, and normalization, as well as managing SQL databases.</li>
+                    <li>Developed dynamic dashboards to deliver actionable insights using SQL, DAX, Power Query, and data modelling.</li>
+                </ul>
             </div>
         </section>
 
-        <section id="skills">
-            <h2>Tech Stack</h2>
-            <div class="skills-grid">
-                <div class="skill-node">SQL</div>
-                <div class="skill-node">Power BI</div>
-                <div class="skill-node">Python</div>
-                <div class="skill-node">Advanced Excel</div>
-                <div class="skill-node">DAX</div>
-                <div class="skill-node">GenAI</div>
+        <section id="education" class="reveal">
+            <h2>Education</h2>
+            <div class="card">
+                <h3>MBA in Business Intelligence</h3>
+                <p>B.K. School of Professional and Management Studies | 2023-2025</p>
+                <p><strong>Award:</strong> Most Regular Student for active engagement among peers.</p>
+            </div>
+            <div class="card">
+                <h3>Bachelor of Commerce (Distinction)</h3>
+                <p>Government Commerce College | 2020-2023</p>
+            </div>
+        </section>
+
+        <section id="projects" class="reveal">
+            <h2>Key Project</h2>
+            <div class="card">
+                <h3>Title Analysis Project - Power BI</h3>
+                <p>Extracted video titles from raw data and cleaned a dataset of 11,437 distinct tags. Designed custom measures and built dashboards featuring bar charts to visualize most viewed, liked, and commented songs. Analyzed engagement metrics to determine the optimal day and time for content uploads.</p>
+            </div>
+        </section>
+
+        <section id="skills" class="reveal">
+            <h2>Technical Skills</h2>
+            <div class="grid">
+                <div class="grid-item">Advanced Excel</div>
+                <div class="grid-item">SQL</div>
+                <div class="grid-item">Power BI</div>
+                <div class="grid-item">Python</div>
+                <div class="grid-item">GenAI Automation</div>
+                <div class="grid-item">DAX & Modeling</div>
+            </div>
+        </section>
+
+        <section id="hobbies" class="reveal">
+            <h2>Hobbies & Interests</h2>
+            <div class="grid">
+                <div class="grid-item">Playing Chess</div>
+                <div class="grid-item">Solving Rubik's Cube</div>
+                <div class="grid-item">Mime Performance</div>
             </div>
         </section>
     </div>
 
-    <footer style="text-align: center; padding: 50px; color: #94a3b8; font-size: 0.8rem;">
-        &copy; 2026 Shashank Pandya. Ahmedabad, Gujarat[cite: 1].
+    <footer>
+        <p>I hereby declare that the information stated above is true to the best of my knowledge.</p>
+        <p style="margin-top: 10px; font-size: 0.9rem;">&copy; 2026 Shashank Pandya</p>
     </footer>
 
     <script>
-        // Intersection Observer for Scroll Animations
-        const observerOptions = { threshold: 0.1 };
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
+        // Reveal elements on scroll
+        const scrollReveal = () => {
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                if (sectionTop < window.innerHeight - 100) {
+                    section.classList.add('reveal');
                 }
             });
-        }, observerOptions);
-
-        document.querySelectorAll('section').forEach(section => {
-            observer.observe(section);
-        });
+        };
+        window.addEventListener('scroll', scrollReveal);
+        window.addEventListener('load', scrollReveal);
     </script>
+
 </body>
 </html>
